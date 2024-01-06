@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="textColor">#FF101617</color>
+    <color name="accentColor">#FFC58BF2</color>
+    <color name="grayColor">#FF7B6F72</color>
+    <color name="bgColor">#FFF7F8F8</color>
+</resources>
+
+
+<!--    val TextColor = Color(0xFF101617)-->
+<!--    val AccentColor = Color(0xFFC58BF2)-->
+<!--    val GrayColor = Color(0xFF7B6F72)-->
+<!--    val whiteColor = Color(0xFFFFFFFF)-->
