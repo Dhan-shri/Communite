@@ -15,13 +15,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.dhanshri.community.R
+import com.dhanshri.community.app.PostOfficeAppRouter
+import com.dhanshri.community.app.Screen
+import com.dhanshri.community.components.ButtonComponent
+import com.dhanshri.community.components.CheckBoxComponent
+import com.dhanshri.community.components.ClickableLoginTextComponent
+import com.dhanshri.community.components.DividerTextComponent
 import com.dhanshri.community.components.HeadingTextComponents
 import com.dhanshri.community.components.MyTextFieldsComponent
 import com.dhanshri.community.components.NormalTextComponents
 import com.dhanshri.community.components.PasswordTextFieldsComponent
 
 @Composable
-fun SignUpScreen(){
+fun SignUpScreen() {
 
     Surface(
         modifier = Modifier
@@ -51,12 +57,27 @@ fun SignUpScreen(){
                 painterResource(R.drawable.ic_moder)
             )
 
+            CheckBoxComponent(value = stringResource(R.string.term_condition),
+                onTextSelected = {
+                    PostOfficeAppRouter.navigateTo(Screen.TermsAndConditionScreen)
+                })
+
+            Spacer(modifier = Modifier.height(90.dp))
+            ButtonComponent(value = stringResource(id = R.string.register))
+
+            DividerTextComponent()
+
+            Spacer(modifier = Modifier.height(40.dp))
+            ClickableLoginTextComponent(onTextSelected = {
+
+            })
+
         }
     }
 }
 
 @Preview
 @Composable
-fun PreviewSignUpScreen(){
+fun PreviewSignUpScreen() {
     SignUpScreen()
 }
