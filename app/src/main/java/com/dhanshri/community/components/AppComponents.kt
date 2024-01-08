@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -33,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -40,10 +42,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -101,7 +105,9 @@ fun MyTextFieldsComponent(labelValue: String, painterResource: Painter) {
             focusedLabelColor = colorResource(id = R.color.purple_200),
             cursorColor = colorResource(id = R.color.purple_200),
         ),
-        keyboardOptions = KeyboardOptions.Default,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+        singleLine = true,
+        maxLines =  1,
         value = textValue.value,
         onValueChange = {
             textValue.value = it
@@ -117,6 +123,8 @@ fun MyTextFieldsComponent(labelValue: String, painterResource: Painter) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PasswordTextFieldsComponent(labelValue: String, painterResource: Painter) {
+
+    val localFocusManager = LocalFocusManager.current // to change the button in keyboard
     val password = remember {
         mutableStateOf("")
     }
@@ -134,7 +142,14 @@ fun PasswordTextFieldsComponent(labelValue: String, painterResource: Painter) {
             focusedLabelColor = colorResource(id = R.color.purple_200),
             cursorColor = colorResource(id = R.color.purple_200),
         ),
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
+        singleLine = true,
+        maxLines = 1,
+        keyboardActions = KeyboardActions(
+            onDone = {
+                localFocusManager.clearFocus()
+            }
+        ),
         value = password.value,
         onValueChange = {
             password.value = it
@@ -222,9 +237,11 @@ fun ClickableTextComponent(value: String, onTextSelected: (String) -> Unit) {
 
 
 @Composable
-fun ButtonComponent(value: String) {
+fun ButtonComponent(value: String, onButtonSelected: () -> Unit) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = {
+            onButtonSelected()
+        },
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(80.dp),
@@ -289,9 +306,9 @@ fun DividerTextComponent() {
 }
 
 @Composable
-fun ClickableLoginTextComponent(onTextSelected: (String) -> Unit) {
-    val initialText = "Already have an account?"
-    val loginText = " Login "
+fun ClickableLoginTextComponent(tryingToLogin: Boolean = true, onTextSelected: (String) -> Unit) {
+    val initialText = if (tryingToLogin) "Already have an account?" else "Don't have an account yet?"
+    val loginText = if (tryingToLogin) " Login " else " Register "
     val annotatedString = buildAnnotatedString {
         append(initialText)
         withStyle(style = SpanStyle(color = colorResource(id = R.color.purple_200))) {
@@ -319,4 +336,23 @@ fun ClickableLoginTextComponent(onTextSelected: (String) -> Unit) {
                     }
                 }
         })
+}
+
+
+@Composable
+fun UnderLinedTextComponent(value: String){
+    Text(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 40.dp),
+        text = value,
+        style = TextStyle(
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Normal,
+            fontStyle = FontStyle.Normal,
+        ),
+        color = colorResource(id = R.color.grayColor),
+        textAlign = TextAlign.Center,
+        textDecoration = TextDecoration.Underline
+    )
 }

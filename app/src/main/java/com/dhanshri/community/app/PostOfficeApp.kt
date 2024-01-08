@@ -6,7 +6,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.dhanshri.community.screens.LoginScreen
 import com.dhanshri.community.screens.SignUpScreen
+import com.dhanshri.community.screens.SplashScreen
 import com.dhanshri.community.screens.TermsAndConditionScreen
 
 @Composable
@@ -22,6 +24,12 @@ fun PostOfficeApp(){
                 }
                 is Screen.TermsAndConditionScreen -> {
                     TermsAndConditionScreen()
+                }
+                is Screen.SplashScreen -> {
+                    SplashScreen()
+                }
+                is Screen.LoginScreen -> {
+                     LoginScreen()
                 }
             }
         }

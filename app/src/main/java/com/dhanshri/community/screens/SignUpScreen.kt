@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.dhanshri.community.R
 import com.dhanshri.community.app.PostOfficeAppRouter
 import com.dhanshri.community.app.Screen
+import com.dhanshri.community.app.SystemBackButtonHandler
 import com.dhanshri.community.components.ButtonComponent
 import com.dhanshri.community.components.CheckBoxComponent
 import com.dhanshri.community.components.ClickableLoginTextComponent
@@ -63,16 +64,21 @@ fun SignUpScreen() {
                 })
 
             Spacer(modifier = Modifier.height(90.dp))
-            ButtonComponent(value = stringResource(id = R.string.register))
+            ButtonComponent(value = stringResource(id = R.string.register)) {}
 
             DividerTextComponent()
 
             Spacer(modifier = Modifier.height(40.dp))
-            ClickableLoginTextComponent(onTextSelected = {
-
+            ClickableLoginTextComponent(tryingToLogin = true, onTextSelected = {
+                PostOfficeAppRouter.navigateTo(Screen.LoginScreen)
             })
 
         }
+    }
+
+
+    SystemBackButtonHandler {
+        PostOfficeAppRouter.navigateTo(Screen.SplashScreen)
     }
 }
 
