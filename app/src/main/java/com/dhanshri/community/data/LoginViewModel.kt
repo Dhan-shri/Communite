@@ -3,13 +3,15 @@ package com.dhanshri.community.data
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.dhanshri.community.data.validation.Validator
 
 class LoginViewModel() : ViewModel(){
 
     private val TAG = "LoginViewModel"
-    private var registrationUIState = mutableStateOf(RegistrationUiState())
+    var registrationUIState = mutableStateOf(RegistrationUiState())
 
     fun onEvent(event: UiEvent){
+        validateDataWithRules() // change the ui filed at a time of adding data
         when(event){
             is UiEvent.FirstNameChanged -> {
                 registrationUIState.value = registrationUIState.value.copy(firstName = event.firstName)
@@ -37,6 +39,27 @@ class LoginViewModel() : ViewModel(){
     private fun signUp(){
        Log.d(TAG, "Inside signUp()")
         printState()
+        validateDataWithRules()
+    }
+
+    private fun validateDataWithRules(){
+        val fNameResult = Validator.validateFirstName(firstName = registrationUIState.value.firstName)
+        val lNameResult = Validator.validateLastName(lastName = registrationUIState.value.lastName)
+        val emailResult = Validator.validateEmail(email = registrationUIState.value.email)
+        val passwordResult = Validator.validatePassword(password = registrationUIState.value.password)
+
+        Log.d(TAG, "Inside_validateDataWithRules()")
+        Log.d(TAG, "firstName $fNameResult")
+        Log.d(TAG, "lastName $lNameResult")
+        Log.d(TAG, "Email $emailResult")
+        Log.d(TAG, "password $passwordResult")
+
+        registrationUIState.value = registrationUIState.value.copy(
+            firstNameError = fNameResult.isValid,
+            lastNameError = lNameResult.isValid,
+            emailError = emailResult.isValid,
+            passwordError = passwordResult.isValid,
+        )
     }
     private fun printState(){
         Log.d(TAG, "Inside printState()")

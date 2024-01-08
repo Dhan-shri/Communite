@@ -50,28 +50,32 @@ fun SignUpScreen(loginViewModel: LoginViewModel = viewModel()) {
                 painterResource(R.drawable.ic_profile),
                 onTextSelected = {
                     loginViewModel.onEvent(UiEvent.FirstNameChanged(it))
-                }
+                },
+                errorStatus = loginViewModel.registrationUIState.value.firstNameError
             )
             MyTextFieldsComponent(
                 labelValue = stringResource(id = R.string.last_name),
                 painterResource(R.drawable.ic_profile),
                 onTextSelected = {
                     loginViewModel.onEvent(UiEvent.LastNameChanged(it))
-                }
+                },
+                errorStatus = loginViewModel.registrationUIState.value.lastNameError
             )
             MyTextFieldsComponent(
                 labelValue = stringResource(id = R.string.email),
                 painterResource(R.drawable.ic_mail),
                 onTextSelected = {
                     loginViewModel.onEvent(UiEvent.EmailChanged(it))
-                }
+                },
+                errorStatus = loginViewModel.registrationUIState.value.emailError
             )
             PasswordTextFieldsComponent(
                 labelValue = stringResource(id = R.string.password),
                 painterResource(R.drawable.ic_moder),
                 onTextSelected = {
                     loginViewModel.onEvent(UiEvent.PasswordChanged(it))
-                }
+                },
+                errorStatus = loginViewModel.registrationUIState.value.passwordError
             )
 
             CheckBoxComponent(value = stringResource(R.string.term_condition),

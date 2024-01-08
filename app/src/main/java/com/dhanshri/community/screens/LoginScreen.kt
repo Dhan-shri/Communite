@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dhanshri.community.R
 import com.dhanshri.community.app.PostOfficeAppRouter
 import com.dhanshri.community.app.Screen
@@ -27,9 +28,10 @@ import com.dhanshri.community.components.MyTextFieldsComponent
 import com.dhanshri.community.components.NormalTextComponents
 import com.dhanshri.community.components.PasswordTextFieldsComponent
 import com.dhanshri.community.components.UnderLinedTextComponent
+import com.dhanshri.community.data.LoginViewModel
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
     Surface (modifier = Modifier
         .fillMaxSize()
         .background(Color.White)
@@ -47,13 +49,15 @@ fun LoginScreen() {
                 painterResource = painterResource(id = R.drawable.ic_mail),
                 onTextSelected = {
 
-                }
+                },
+                errorStatus = loginViewModel.registrationUIState.value.emailError
             )
 
             PasswordTextFieldsComponent(labelValue = stringResource(id = R.string.password), painterResource = painterResource(id = R.drawable.ic_moder),
                 onTextSelected = {
 
-                }
+                },
+                errorStatus = loginViewModel.registrationUIState.value.passwordError
             )
             Spacer(modifier = Modifier.height(40.dp))
 
