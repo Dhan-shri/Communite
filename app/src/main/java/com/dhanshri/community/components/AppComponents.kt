@@ -90,7 +90,9 @@ fun HeadingTextComponents(value: String) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyTextFieldsComponent(labelValue: String, painterResource: Painter) {
+fun MyTextFieldsComponent(labelValue: String, painterResource: Painter,
+                          onTextSelected: (String) -> Unit
+) {
     val textValue = remember {
         mutableStateOf("")
     }
@@ -111,6 +113,7 @@ fun MyTextFieldsComponent(labelValue: String, painterResource: Painter) {
         value = textValue.value,
         onValueChange = {
             textValue.value = it
+            onTextSelected(it)
         },
         leadingIcon = {
             Icon(painter = painterResource, contentDescription = "Profile")
@@ -122,7 +125,7 @@ fun MyTextFieldsComponent(labelValue: String, painterResource: Painter) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PasswordTextFieldsComponent(labelValue: String, painterResource: Painter) {
+fun PasswordTextFieldsComponent(labelValue: String, painterResource: Painter,  onTextSelected: (String) -> Unit) {
 
     val localFocusManager = LocalFocusManager.current // to change the button in keyboard
     val password = remember {
@@ -153,6 +156,7 @@ fun PasswordTextFieldsComponent(labelValue: String, painterResource: Painter) {
         value = password.value,
         onValueChange = {
             password.value = it
+            onTextSelected(it)
         },
         leadingIcon = {
             Icon(painter = painterResource, contentDescription = "Profile")
@@ -237,16 +241,18 @@ fun ClickableTextComponent(value: String, onTextSelected: (String) -> Unit) {
 
 
 @Composable
-fun ButtonComponent(value: String, onButtonSelected: () -> Unit) {
+fun ButtonComponent(value: String, onButtonClicked: () -> Unit, isEnabled: Boolean = false) {
     Button(
         onClick = {
-            onButtonSelected()
+            onButtonClicked.invoke()
         },
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(80.dp),
         contentPadding = PaddingValues(10.dp),
-        colors = ButtonDefaults.buttonColors(androidx.compose.ui.graphics.Color.Transparent)
+        colors = ButtonDefaults.buttonColors(androidx.compose.ui.graphics.Color.Transparent),
+        shape = RoundedCornerShape(50.dp),
+        enabled = isEnabled
     ) {
         Box(
             modifier = Modifier

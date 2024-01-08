@@ -43,22 +43,30 @@ fun LoginScreen() {
             HeadingTextComponents(value = stringResource(R.string.welcome_back))
 
             Spacer(modifier = Modifier.height(20.dp))
-            MyTextFieldsComponent(labelValue = stringResource(id = R.string.email), painterResource = painterResource(
-                id = R.drawable.ic_mail
-            ))
+            MyTextFieldsComponent(labelValue = stringResource(id = R.string.email),
+                painterResource = painterResource(id = R.drawable.ic_mail),
+                onTextSelected = {
 
-            PasswordTextFieldsComponent(labelValue = stringResource(id = R.string.password), painterResource = painterResource(
-                id = R.drawable.ic_moder
-            ))
+                }
+            )
+
+            PasswordTextFieldsComponent(labelValue = stringResource(id = R.string.password), painterResource = painterResource(id = R.drawable.ic_moder),
+                onTextSelected = {
+
+                }
+            )
             Spacer(modifier = Modifier.height(40.dp))
 
             UnderLinedTextComponent(value = "Forgot your Password?")
 
             Spacer(modifier = Modifier.height(50.dp))
 
-            ButtonComponent(value = "Login") {
-                Toast.makeText(return@ButtonComponent, "Login", Toast.LENGTH_SHORT).show()
-            }
+            ButtonComponent(value = "Login",
+                onButtonClicked = {
+
+                },
+                isEnabled = true
+            )
 
             Spacer(modifier = Modifier.height(20.dp))
             DividerTextComponent()

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "783248647502",
+    "project_id": "communite-ddcf5",
+    "storage_bucket": "communite-ddcf5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783248647502:android:a998822669b668db346a1f",
+        "android_client_info": {
+          "package_name": "com.dhanshri.community"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAENIko10JOkV01kYgI0ojTkgpzi-v1PKU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
