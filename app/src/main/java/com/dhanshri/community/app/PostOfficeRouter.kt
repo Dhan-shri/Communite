@@ -8,6 +8,7 @@ sealed class Screen{
     object TermsAndConditionScreen : Screen()
     object SplashScreen : Screen()
     object LoginScreen : Screen()
+    object HomeScreen : Screen()
 }
 
 object PostOfficeAppRouter {

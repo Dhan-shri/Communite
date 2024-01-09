@@ -23,6 +23,12 @@ object Validator {
             (!password.isNullOrEmpty() && password.length >= 6)
         )
     }
+
+    fun validatePrivacyPolicy(statusValue: Boolean): ValidationResponse {
+        return ValidationResponse(
+            statusValue
+        )
+    }
 }
 
 data class ValidationResponse(
