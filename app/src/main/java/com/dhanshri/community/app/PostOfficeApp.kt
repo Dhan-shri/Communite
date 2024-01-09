@@ -6,6 +6,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.dhanshri.community.screens.HomeScreen
 import com.dhanshri.community.screens.LoginScreen
 import com.dhanshri.community.screens.SignUpScreen
 import com.dhanshri.community.screens.SplashScreen
@@ -30,6 +31,9 @@ fun PostOfficeApp(){
                 }
                 is Screen.LoginScreen -> {
                      LoginScreen()
+                }
+                is Screen.HomeScreen-> {
+                     HomeScreen()
                 }
             }
         }

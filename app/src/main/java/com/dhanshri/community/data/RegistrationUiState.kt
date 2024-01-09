@@ -6,10 +6,14 @@ data class RegistrationUiState (
     var email: String = "",
     var password: String = "",
 
+    var privacyPolicyAccepted: Boolean = false,
 
     //Error field
     var firstNameError: Boolean = false,
     var lastNameError: Boolean = false,
     var emailError: Boolean = false,
     var passwordError: Boolean = false,
+
+    var privacyPolicyError :Boolean = false,
+
 )

@@ -15,5 +15,6 @@
     <string name="or">or</string>
     <string name="login">Login</string>
     <string name="welcome_back">Welcome Back!</string>
+    <string name="logout">Logout</string>
 
 </resources>
