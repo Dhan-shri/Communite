@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.dhanshri.community" />
+                  <option name="mobileSdkAppId" value="1:783248647502:android:a998822669b668db346a1f" />
+                  <option name="projectId" value="communite-ddcf5" />
+                  <option name="projectNumber" value="783248647502" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

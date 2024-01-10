@@ -5,15 +5,21 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Logout
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
@@ -26,6 +32,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,6 +41,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -53,6 +61,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dhanshri.community.R
 import com.dhanshri.community.app.componentShapes
+import com.dhanshri.community.data.NavigationItem
 
 @Composable
 fun NormalTextComponents(value: String) {
@@ -368,4 +377,82 @@ fun UnderLinedTextComponent(value: String){
         textAlign = TextAlign.Center,
         textDecoration = TextDecoration.Underline
     )
+}
+
+
+// App toolbar
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AppToolBar(toolbarTitle: String, logoutButtonClicked: () -> Unit) {
+    
+    TopAppBar(
+        modifier = Modifier.background(color = colorResource(id = R.color.purple_200)),
+        navigationIcon = {
+            Icon(
+                imageVector = Icons.Filled.Menu,
+                contentDescription = "Menu",
+                tint = colorResource(id = R.color.black)
+            )
+        },
+        title = {
+            Text(
+                text = toolbarTitle,
+                color = colorResource(id = R.color.black)
+            )
+        },
+        actions = {
+            IconButton(onClick = {
+                logoutButtonClicked.invoke()
+            }) {
+                Icon(
+                    imageVector = Icons.Filled.Logout,
+                    contentDescription = "Logout",
+                    tint = colorResource(id = R.color.black)
+                )
+            }
+        }
+    )
+}
+
+
+
+@Composable
+fun NavigationDrawerHeader(){
+    Box (modifier = Modifier
+        .fillMaxWidth()
+        .padding(35.dp)
+    ){
+        HeadingTextComponents(value = "Navigation Header")
+    }
+}
+
+
+@Composable
+fun NavigationDrawerBody(navigationItem : List<NavigationItem>){
+    // Lazy coloumn is like list of item which we can show in list in vertical orientation
+    LazyColumn(modifier = Modifier.fillMaxWidth()){
+
+        items(navigationItem.size){ index ->
+            NavigationItemRow(item = navigationItem[index])
+        }
+
+    }
+
+}
+
+// Same like xml item for recyclerview
+@Composable
+fun NavigationItemRow(item : NavigationItem){
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .padding(all = 16.dp)
+    ){
+        Icon(
+            imageVector = item.icon,
+            contentDescription = item.description,
+            tint = colorResource(id = R.color.black)
+        )
+        Spacer(modifier = Modifier.width(18.dp))
+        NormalTextComponents(value = item.title)
+    }
 }

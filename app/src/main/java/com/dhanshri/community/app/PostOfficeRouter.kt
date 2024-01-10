@@ -12,7 +12,7 @@ sealed class Screen{
 }
 
 object PostOfficeAppRouter {
-    var currentScreen: MutableState<Screen> = mutableStateOf(Screen.SplashScreen)
+    var currentScreen: MutableState<Screen> = mutableStateOf(Screen.HomeScreen)
 
     fun navigateTo(destination: Screen) {
         currentScreen.value = destination
