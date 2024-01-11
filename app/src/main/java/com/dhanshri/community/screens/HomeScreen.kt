@@ -17,9 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dhanshri.community.R
 import com.dhanshri.community.components.AppToolBar
-import com.dhanshri.community.components.ButtonComponent
-import com.dhanshri.community.components.HeadingTextComponents
-import com.dhanshri.community.components.NavigationDrawerHeader
 import com.dhanshri.community.data.LoginViewModel
 
 @Composable
@@ -33,9 +30,8 @@ fun HomeScreen(loginViewModel: LoginViewModel = viewModel()) {
                 }
             )
         },
-//       drawerContent = {
-//          NavigationDrawerHeader()
-//       }
+
+
 
     )
     { paddingValues ->
